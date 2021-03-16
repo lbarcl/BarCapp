@@ -33,8 +33,12 @@ io.on('connection', socket => {
   socket.on('chatMessage', msg =>{
     const user = getCurrentUser(socket.id);
     io.to(user.room).emit('message', formatMessage(user.username, msg))
-  })
 
+      var date = new Date();
+      var offset = date.getTimezoneOffset();
+      console.log(offset);
+  })
+  
   socket.on('disconnect', () => {
     const user = userLeave(socket.id)
     if(user){
